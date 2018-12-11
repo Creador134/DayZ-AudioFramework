@@ -24,30 +24,25 @@ class CfgPatches
         ...
         requiredAddons[]=
         {
-            "MOVNotificationScripts",
+            "MOVAudioScripts",
             ...
         };
     };
 };
 ```
 
-### Call an notification function
+### Call an audio function
 
-Notification framework currently have these functions:
-
-```java
-GetNotificationManager().ShowAlert("Welcome!", 1000, 0);
-```
-
-* For the string variable 'Welcone' you would add your text.
-* For the int variable '1000' you would add the hide time.
-* For the int variable '0' you would add the delay. 
+Audio framework currently have these functions:
 
 ```java
-GetNotificationManager().HideAlert(1000);
+GetAudioManager().PlayAudio(TestObject, "Test", 0, 1000);
 ```
 
-* For the int variable '1000' you would add the delay. 
+* For the object variable 'TestObject' you would add your object.
+* For the string variable 'Test' you would add the name of audio class.
+* For the int variable '0' you would add the type of sound (single [0] or loop [1]). 
+* For the int variable '1000' you would add the radius of sound. 
 
 ### Example
 
@@ -58,10 +53,7 @@ Soon
 Here are some projects that are already planned to use this Framework.
 
 * AirDrop Redux by mov3ax
-* GPS Mod by mov3ax
-* DayZ Reloaded by mov3ax
 
 ## Contributors
 
 * [mov3ax](https://github.com/mov3ax)
-* [Jacob_Mango](https://github.com/Jacob-Mango) (Thanks to him for his troubleshooting and helping with RPC Framework)
