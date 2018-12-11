@@ -46,23 +46,21 @@ class CfgMods
         };
     };
 };
-class CfgSoundShaders
+class CfgSounds
 {
-	class baseCharacter_SoundShader;
-	class Test_SoundShader: baseCharacter_SoundShader
+	class default
 	{
-		samples[] = {{"mov\audio\sounds\test",1}};
-		volume = 0.5011872;
+		name="";
+		titles[]={};
 	};
-};
-class CfgSoundSets
-{
-	class baseCharacter_SoundSet;
-	class Test_SoundSet: baseCharacter_SoundSet
+	class TestSound: default
 	{
-		soundShaders[] = {"Test_SoundShader"};
-		loop = 1;
-		frequencyRandomizer = 1;
-		volumeRandomizer = 1;
+		sound[]=
+		{
+			"\mov\audio\sounds\test",
+			1,
+			1,
+			2000
+		};
 	};
 };

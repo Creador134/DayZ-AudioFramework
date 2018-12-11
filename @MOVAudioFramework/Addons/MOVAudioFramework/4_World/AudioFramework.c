@@ -6,7 +6,7 @@ enum AudioType
 
 class AudioMeta
 {
-    int m_Delay;
+    int m_Range;
 	int m_Type;
 	
 	string m_Sound;
@@ -26,7 +26,7 @@ class AudioFramework
     
     void AudioFramework()
     {
-        GetRPCManager().AddRPC( "MOVNotificationFramework", "Transfer", this, SingeplayerExecutionType.Client );
+        GetRPCManager().AddRPC( "MOVAudioFramework", "Transfer", this, SingeplayerExecutionType.Both );
         
         m_Audio = new AudioMeta();
         
@@ -52,27 +52,27 @@ class AudioFramework
 	{
 		if (m_Audio.m_Type == AudioType.Single)
 		{
-			m_Audio.m_Object.PlaySoundSet(m_Audio.m_EffectSound, m_Audio.m_Sound, m_Audio.m_Delay, 0, false);
+			m_Audio.m_Object.PlaySound(m_Audio.m_Sound, m_Audio.m_Range);
 		}
 		if (m_Audio.m_Type == AudioType.Loop)
 		{
-			m_Audio.m_Object.PlaySoundSet(m_Audio.m_EffectSound, m_Audio.m_Sound, m_Audio.m_Delay, 0, true);
+			m_Audio.m_Object.PlaySoundLoop(m_Audio.m_Sound, m_Audio.m_Range);
 		}
 	}
 	
-	void PlayAudioClient(Object l_Object, string l_Sound, int l_Type, int l_Delay)
+	void PlayAudioClient(Object l_Object, string l_Sound, int l_Type, int m_Range)
 	{
 		m_Audio.m_Object = l_Object;
 		m_Audio.m_Sound = l_Sound;
 		m_Audio.m_Type = l_Type;
-		m_Audio.m_Delay = l_Delay;	
+		m_Audio.m_Range = m_Range;	
 		
-		m_Audio.m_Queue.CallLater(PlayAudioClient, l_Delay, false);    
+		m_Audio.m_Queue.CallLater(OnPlayAudioClient, m_Range, false);    
 	}
 	
-	void PlayAudio(Object l_Object, string l_Sound, int l_Type = AudioType.Single, int l_Delay = 0)
+	void PlayAudio(Object l_Object, string l_Sound, int l_Type = AudioType.Single, int m_Range = 0)
 	{
-		GetRPCManager().SendRPC( "MOVAudioFramework", "Transfer", new Param4< Object, string, int, int >( l_Object, l_Sound, l_Type, l_Delay) )
+		GetRPCManager().SendRPC( "MOVAudioFramework", "Transfer", new Param4< Object, string, int, int >( l_Object, l_Sound, l_Type, m_Range) )
 	}
 
 	void StopAudio()
